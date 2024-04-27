@@ -14,9 +14,10 @@ const Schema = Block.extend({
 export default function Page() {
   const { intro, steps, outro } = parseRoot(Content, Schema)
   return (
-    <main>
-      <Link href="/">Back</Link>
-      <h1 className="mt-8">{intro.title}</h1>
+    <section>
+      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
+        The Unreasonable Effectiveness of Functional Calling
+      </h1>
       {intro.children}
       <SelectionProvider className="flex gap-4">
         <div className="flex-1 mt-32 mb-[90vh] ml-2 prose prose-invert">
@@ -25,14 +26,14 @@ export default function Page() {
               key={i}
               index={i}
               selectOn={["click", "scroll"]}
-              className="border-l-4 border-zinc-700 data-[selected=true]:border-blue-400 px-5 py-2 mb-24 rounded bg-zinc-900"
+              className="border-l-4 border-zinc-700 data-[selected=true]:border-blue-400 px-5 py-2 mb-24 rounded"
             >
               <h2 className="mt-4 text-xl">{step.title}</h2>
               <div>{step.children}</div>
             </Selectable>
           ))}
         </div>
-        <div className="w-[40vw] max-w-xl bg-zinc-900">
+        <div className="w-[40vw] max-w-xl">
           <div className="top-4 sticky overflow-auto">
             <Selection
               from={steps.map((step) => (
@@ -44,7 +45,7 @@ export default function Page() {
       </SelectionProvider>
       <h2>{outro.title}</h2>
       {outro.children}
-    </main>
+    </section>
   )
 }
 
