@@ -1,0 +1,70 @@
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+import { ChevronDownIcon } from "lucide-react"
+import { BlockAnnotation, AnnotationHandler } from "codehike/code"
+
+const collapseRoot: AnnotationHandler = {
+  name: "Collapse",
+  transform: (annotation: BlockAnnotation) => {
+    const { fromLineNumber } = annotation
+    return [
+      annotation,
+      {
+        ...annotation,
+        fromLineNumber: fromLineNumber,
+        toLineNumber: fromLineNumber,
+        name: "CollapseTrigger",
+      },
+      {
+        ...annotation,
+        fromLineNumber: fromLineNumber + 1,
+        name: "CollapseContent",
+      },
+    ]
+  },
+  Block: ({ annotation, children }) => {
+    return (
+      <Collapsible defaultOpen={annotation.query !== "collapsed"}>
+        {children}
+      </Collapsible>
+    )
+  },
+}
+
+const collapseTrigger: AnnotationHandler = {
+  name: "CollapseTrigger",
+  AnnotatedLine: ({ annotation, InnerLine, ...props }) => {
+    const icon = (
+      <ChevronDownIcon
+        className="inline-block group-data-[state=closed]:-rotate-90 transition select-none opacity-30 group-data-[state=closed]:opacity-80 group-hover:!opacity-100 mb-0.5"
+        size={15}
+      />
+    )
+    return (
+      <CollapsibleTrigger className="group contents">
+        <InnerLine merge={props} icon={icon} />
+      </CollapsibleTrigger>
+    )
+  },
+  Line: ({ annotation, icon, InnerLine, lineNumber, children, ...props }) => {
+    return (
+      <InnerLine merge={props} className="table-row">
+        <span className="pr-2 w-[4ch] box-content !opacity-50 text-right select-none table-cell">
+          {lineNumber}
+        </span>
+        <span className="w-6 text-center table-cell">{icon}</span>
+        <div className="table-cell break-words">{children}</div>
+      </InnerLine>
+    )
+  },
+}
+
+const collapseContent: AnnotationHandler = {
+  name: "CollapseContent",
+  Block: CollapsibleContent,
+}
+
+export const collapse = [collapseRoot, collapseTrigger, collapseContent]
