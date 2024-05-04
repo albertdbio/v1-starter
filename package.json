@@ -9,12 +9,17 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@code-hike/mdx": "^0.9.0",
+    "@mdx-js/loader": "^3.0.0",
+    "@mdx-js/react": "^3.0.0",
+    "@next/mdx": "^14.1.0",
     "@tailwindcss/postcss": "4.0.0-alpha.13",
     "@types/node": "20.11.17",
     "@types/react": "18.2.55",
     "@types/react-dom": "18.2.19",
     "@vercel/analytics": "^1.1.3",
     "@vercel/speed-insights": "^1.0.9",
+    "codehike": "^1.0.0-alpha.13",
     "geist": "1.2.2",
     "next": "14.1.0",
     "postcss": "^8.4.35",
@@ -22,10 +27,6 @@
     "react-dom": "^18",
     "tailwindcss": "^4.0.0-alpha.13",
     "typescript": "5.3.3",
-    "@mdx-js/loader": "^3.0.0",
-    "@mdx-js/react": "^3.0.0",
-    "@next/mdx": "^14.1.0",
-    "codehike": "^1.0.0-alpha.13",
     "zod": "^3.23.4"
   }
 }
